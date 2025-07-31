@@ -2,8 +2,9 @@ import os
 import re
 from html.parser import HTMLParser
 
-# === Global Directory Path Variable ===
-DIR_PATH = "templates"
+# === Global Config ===
+DIR_PATH = "templates"  # Set to "templates" by Defualt Edit as needed
+DRY_RUN = True  # Set to False to actually modify files
 
 class CommentStrippingHTMLParser(HTMLParser):
     def __init__(self):
@@ -53,10 +54,10 @@ class CommentStrippingHTMLParser(HTMLParser):
         pass
 
     def remove_js_css_comments(self, text):
-        # Remove /* ... */ comments, including ones with *-prefixes on new lines
+        # Remove /* ... */ block comments (including indented lines like * OMG)
         text = re.sub(r'/\*[^*]*\*+(?:[^/*][^*]*\*+)*/', '', text, flags=re.DOTALL)
 
-        # Remove // line comments not in strings
+        # Remove // line comments outside strings
         def strip_line_comments(code):
             output_lines = []
             for line in code.splitlines():
@@ -92,10 +93,12 @@ def remove_all_comments_from_html_file(file_path):
         parser.feed(content)
         cleaned_html = parser.get_clean_html()
 
-        with open(file_path, 'w', encoding='utf-8') as file:
-            file.write(cleaned_html)
-
-        print(f"Cleaned: {file_path}")
+        if DRY_RUN:
+            print(f"[DRY-RUN] Would clean: {file_path}")
+        else:
+            with open(file_path, 'w', encoding='utf-8') as file:
+                file.write(cleaned_html)
+            print(f"Cleaned: {file_path}")
     except Exception as e:
         print(f"Couldn't Clean: {file_path} ({e})")
 
@@ -105,6 +108,5 @@ def clean_all_templates():
             if filename.endswith('.html'):
                 file_path = os.path.join(root, filename)
                 remove_all_comments_from_html_file(file_path)
-
 
 clean_all_templates()
