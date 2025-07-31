@@ -3,7 +3,7 @@ import re
 from html.parser import HTMLParser
 
 # === Global Directory Path Variable ===
-DIR_PATH = "<Put-The-Dir-Path-Here>"
+DIR_PATH = "templates"
 
 class CommentStrippingHTMLParser(HTMLParser):
     def __init__(self):
@@ -100,9 +100,11 @@ def remove_all_comments_from_html_file(file_path):
         print(f"Couldn't Clean: {file_path} ({e})")
 
 def clean_all_templates():
-    for filename in os.listdir(DIR_PATH):
-        if filename.endswith('.html'):
-            file_path = os.path.join(DIR_PATH, filename)
-            remove_all_comments_from_html_file(file_path)
+    for root, _, files in os.walk(DIR_PATH):
+        for filename in files:
+            if filename.endswith('.html'):
+                file_path = os.path.join(root, filename)
+                remove_all_comments_from_html_file(file_path)
+
 
 clean_all_templates()
