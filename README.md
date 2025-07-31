@@ -1,6 +1,11 @@
 # HTMLVacuum
 
-**HTMLVacuum** is a Python script that scans HTML files in a specified directory and removes:
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![Status](https://img.shields.io/badge/Project-Stable-brightgreen)
+![License](https://img.shields.io/badge/License-Unlicensed-lightgrey)
+![HTML Cleaner](https://img.shields.io/badge/Tool-HTMLVacuum-ff69b4)
+
+**HTMLVacuum** is a Python script that scans HTML files in a specified directory — **including all subfolders** — and removes:
 
 - HTML comments (`<!-- ... -->`)
 - JavaScript comments (`// single-line`, `/* multi-line */`)
@@ -50,38 +55,43 @@ Save the file as `clean_html.py`.
 python clean_html.py
 ```
 
-All `.html` files inside the specified directory will be cleaned in-place.
+All `.html` files inside the specified directory — including files in all nested subfolders — will be cleaned in-place.
 
 ---
 
-## 📁 Project Structure
+## 📁 Project Structure Example
 
 ```
 project/
 │
-├── templates/               # ← Your HTML files go here
+├── templates/
 │   ├── index.html
 │   ├── about.html
-│   └── ...
+│   └── blog/
+│       └── post.html
 │
-└── clean_html.py            # ← The cleaning script
+└── clean_html.py
 ```
+
+✅ All of the above `.html` files will be processed.
 
 ---
 
 ## 📌 Notes
 
 - The script **modifies files in-place**. Make backups if needed.
-- Only **top-level** `.html` files in the directory are processed (no subfolders, yet).
+- Processes **all `.html` files recursively**, including deep subdirectories.
+- Skips anything that isn’t a `.html` file.
 
 ---
 
-## 🧠 Future Improvements
+## 🧠 Features & Future Improvements
 
-- ✅ Support nested folders  
-- ✅ Add dry-run mode  
-- ✅ Add command-line support for dynamic paths  
-- ✅ Optional file backup before modification  
+- ✅ Removes all HTML, JS, and CSS comments
+- ✅ Recursively supports nested folders  
+- 🔄 Optional dry-run mode (coming soon)  
+- 🔄 Optional command-line arguments  
+- 🔄 Optional file backups before modifying  
 
 ---
 
@@ -96,12 +106,13 @@ project/
 
 ## 📄 License
 
-Free to use, modify, or improve—no license restrictions.  
+Free to use, modify, or improve — no license restrictions.  
 This is an open project to learn and build something useful.
 
 ---
 
-Let me know if you want help adding:
-- ✅ Command-line support  
-- ✅ A CLI tool (`htmlvacuum`) with `argparse`  
-- ✅ A badge or GIF demo for GitHub
+Let me know if you'd like:
+- A GIF demo  
+- A CLI tool wrapper (`htmlvacuum`)  
+- Command-line argument support  
+- Backup mode or dry-run feature
