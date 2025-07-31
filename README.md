@@ -49,13 +49,24 @@ DIR_PATH = "./templates"
 
 Save the file as `clean_html.py`.
 
-### 2. Run It
+### 2. Enable or Disable Dry-Run Mode
+
+At the top of the script, you'll see:
+
+```python
+DRY_RUN = True  # Set to False to actually modify files
+```
+
+- `True` → Simulates cleanup without modifying files  
+- `False` → Actually rewrites each cleaned `.html` file
+
+### 3. Run It
 
 ```bash
 python clean_html.py
 ```
 
-All `.html` files inside the specified directory — including files in all nested subfolders — will be cleaned in-place.
+All `.html` files inside the specified directory — including files in all nested subfolders — will be processed accordingly.
 
 ---
 
@@ -79,17 +90,18 @@ project/
 
 ## 📌 Notes
 
-- The script **modifies files in-place**. Make backups if needed.
+- The script can operate in **dry-run mode** to simulate changes with no file writes.
+- Otherwise, it **modifies files in-place**. Make backups if needed.
 - Processes **all `.html` files recursively**, including deep subdirectories.
 - Skips anything that isn’t a `.html` file.
 
 ---
 
-## 🧠 Features & Future Improvements
+## 🧠 Features & Possible Future Improvements
 
-- ✅ Removes all HTML, JS, and CSS comments
+- ✅ Removes all HTML, JS, and CSS comments  
 - ✅ Recursively supports nested folders  
-- 🔄 Optional dry-run mode (coming soon)  
+- ✅ Dry-run mode for safe testing  
 - 🔄 Optional command-line arguments  
 - 🔄 Optional file backups before modifying  
 
@@ -97,7 +109,7 @@ project/
 
 ## 👨‍💻 Author
 
-**Mohtady Bellah**  
+**Almohtady Bellah**  
 🌐 [almohtadyg1.pythonanywhere.com](https://almohtadyg1.pythonanywhere.com/)  
 🧠 16 y/o | Self-learning programmer  
 💻 Python, JS, HTML/CSS, C++
@@ -115,4 +127,4 @@ Let me know if you'd like:
 - A GIF demo  
 - A CLI tool wrapper (`htmlvacuum`)  
 - Command-line argument support  
-- Backup mode or dry-run feature
+- Backup feature before file overwrite
